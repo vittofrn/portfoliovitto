@@ -1,40 +1,40 @@
 # Vittoria Fornari — Portfolio
 
 A static recreation of [vittogd.framer.website](https://vittogd.framer.website/), built with plain
-HTML, CSS and JavaScript so it can be hosted anywhere (GitHub Pages, Netlify, Vercel…).
+HTML/CSS/JS so it can be hosted anywhere (GitHub Pages, Netlify, Vercel…).
 
 ## Structure
 
 ```
 portfolio-site/
-├── index.html          # markup
-├── css/style.css       # styles
-├── js/main.js          # builds the project nodes, dashed links & drag-to-pan
-└── assets/img/         # logo + 8 project images
+├── index.html           # the whole site (markup + styles + script inline)
+└── fonts/chaos16.woff2  # the CHAOS16 display font
 ```
 
 ## The constellation canvas
-The homepage is a draggable "mind-map": a centre card surrounded by 8 project cards
-connected with dashed lines. **Drag** to pan, **click** a card to open its project.
-On phones it collapses into a 2-column gallery.
+The homepage is a draggable "mind-map": a centre **HELLO I'M Vitto** card surrounded by 8 project
+cards, joined by curved links plus dashed cross-links between projects that share a discipline.
+**Drag** any card to rearrange, **click** to open its project, **hover** for a preview tooltip.
+A scrolling "Available for hire" ticker sits on top, and the layout collapses to a hamburger
+menu on phones.
 
 ## Editing
-- **Projects** — edit the `PROJECTS` array at the top of `js/main.js`. Each entry has a
-  `name`, `cat` (category), `img`, `bg` (card colour), `x`/`y` position offset, and a `link`.
-  The `link` fields are set to `#` — point them at your real project pages.
-- **Text / contact** — edit `index.html` (about paragraph, email, social URLs).
-- **Social links** — the Instagram / LinkedIn / Behance / X URLs are placeholders; replace them.
+Everything lives in `index.html`:
+- **Projects** — edit the `PROJECTS` array in the `<script>` (name, category, type, url, image, angle).
+- **Header / social links** — Instagram, LinkedIn, Behance and the email are in the `<header>` and drawer.
+- **Fonts** — DotGothic16 loads from Google Fonts; CHAOS16 from the local `fonts/chaos16.woff2`.
+
+> Note: project thumbnails, the logo and the project links currently load from Framer's CDN
+> (`framerusercontent.com` / `vittogd.framer.website`). They'll keep working while the Framer site
+> exists. To make the site fully independent, download those images into a local folder and update
+> the `img` / `url` values.
 
 ## Run locally
 ```bash
 cd portfolio-site
-python3 -m http.server 8000
-# open http://localhost:8000
+python3 -m http.server 8000   # open http://localhost:8000
 ```
 
 ## Deploy to GitHub Pages
-1. Create a repo and push the contents of `portfolio-site/` to it.
-2. Repo **Settings → Pages → Source: Deploy from a branch → `main` / root**.
-3. Your site goes live at `https://<username>.github.io/<repo>/`.
-
-Fonts are loaded from Google Fonts (Caveat, DotGothic16, Fragment Mono).
+Push the contents of `portfolio-site/` to a repo, then **Settings → Pages → Deploy from a branch →
+`main` / root**. Live at `https://<username>.github.io/<repo>/`.

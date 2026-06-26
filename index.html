@@ -5,93 +5,514 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vittoria Fornari — Portfolio</title>
   <meta name="description" content="Portfolio of Vittoria Fornari, Visual Designer. Editorial, UX/UI, illustration, motion and more." />
-
-  <link rel="icon" type="image/png" href="assets/img/logo.png" />
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=DotGothic16&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet" />
-
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" type="image/png" href="https://framerusercontent.com/images/n1YNd1TskF9dkrvfPnELuHqhSiY.png" />
 </head>
-<body>
+<body style="margin:0">
 
-  <!-- ===================== HEADER ===================== -->
-  <header class="site-header">
-    <a class="brand" href="#top">
-      <img class="brand-face" src="assets/img/logo.png" alt="Vittoria Fornari" />
-      <span class="brand-name">Vittoria Fornari</span>
-    </a>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
 
-    <nav class="nav">
-      <a href="#about">About</a>
-      <a href="#works">Fun Projects</a>
-      <a href="#contact">Contact</a>
-      <span class="nav-sep">|</span>
-      <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
-      <a href="https://linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://behance.net/" target="_blank" rel="noopener">Behance</a>
+<style>
+/* CHAOS16 with Silkscreen as mobile fallback */
+@font-face {
+  font-family: 'CHAOS16';
+  src: url('fonts/chaos16.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+/* single root fills the iframe fully */
+#vr {
+  position:relative;
+  width:100%; height:100vh;
+  overflow:hidden;
+  background:#fff;
+  font-family:'DotGothic16','DotGothic16 Placeholder',sans-serif;
+  color:#000;
+}
+
+/* ── TICKER ── */
+#vr-ticker {
+  position:absolute; top:0; left:0; right:0; z-index:110;
+  height:28px; background:#000; overflow:hidden;
+  display:flex; align-items:center;
+}
+.vr-ticker-track {
+  display:flex; align-items:center;
+  white-space:nowrap;
+  animation:vrTickerScroll 40s linear infinite;
+}
+.vr-ticker-track span {
+  font-family:'DotGothic16',sans-serif;
+  font-size:9px; letter-spacing:.18em; text-transform:uppercase;
+  color:rgba(255,255,255,.75); padding:0 28px;
+}
+.vr-ticker-track .vr-dot {
+  color:rgba(255,255,255,.3); font-size:6px; padding:0; letter-spacing:0;
+}
+@keyframes vrTickerScroll {
+  from { transform:translateX(0); }
+  to   { transform:translateX(-50%); }
+}
+
+/* ── HEADER ── */
+#vr-hdr {
+  position:absolute; top:28px; left:0; right:0; z-index:100;
+  height:64px; background:#fff;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 40px;
+}
+.vr-hdr-left { display:flex; align-items:center; gap:10px; flex-shrink:0; }
+.vr-hdr-logo { width:32px; height:32px; object-fit:contain; border-radius:50%; }
+.vr-hdr-name {
+  font-family:'CHAOS16',sans-serif;
+  font-size:20px; letter-spacing:.04em; color:#000;
+}
+.vr-hdr-links { display:flex; align-items:center; gap:32px; }
+.vr-hdr-links a {
+  font-family:'DotGothic16',sans-serif;
+  font-size:11px; letter-spacing:.16em; text-transform:uppercase;
+  color:rgba(0,0,0,.45); text-decoration:none;
+  transition:color .15s;
+}
+.vr-hdr-links a:hover { color:#000; }
+.vr-hdr-div { width:1px; height:14px; background:rgba(0,0,0,.15); }
+
+/* hamburger button — hidden on desktop */
+#vr-burger {
+  display:none;
+  flex-direction:column; gap:5px;
+  cursor:pointer; padding:4px; background:none; border:none;
+  z-index:200;
+}
+#vr-burger span {
+  display:block; width:22px; height:1.5px; background:#000;
+  transition:transform .25s ease, opacity .25s ease;
+}
+#vr-burger.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
+#vr-burger.open span:nth-child(2) { opacity:0; }
+#vr-burger.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
+
+/* mobile drawer */
+#vr-drawer {
+  display:none;
+  position:absolute; top:92px; left:0; right:0;
+  background:#fff; z-index:90;
+  border-bottom:1px solid rgba(0,0,0,.08);
+  padding:20px 40px 28px;
+  flex-direction:column; gap:20px;
+  transform:translateY(-8px); opacity:0;
+  transition:transform .25s ease, opacity .25s ease;
+}
+#vr-drawer.open {
+  display:flex; transform:translateY(0); opacity:1;
+}
+#vr-drawer a {
+  font-family:'DotGothic16',sans-serif;
+  font-size:13px; letter-spacing:.16em; text-transform:uppercase;
+  color:rgba(0,0,0,.55); text-decoration:none;
+  transition:color .15s;
+}
+#vr-drawer a:hover { color:#000; }
+
+/* ── RESPONSIVE ── */
+@media (max-width:680px) {
+  #vr-hdr { padding:0 20px; }
+  .vr-hdr-links { display:none; }
+  #vr-burger { display:flex; }
+  .vr-hdr-name { font-size:16px; }
+  .vr-hdr-logo { width:26px; height:26px; }
+}
+
+/* ── MAP CANVAS ── */
+#vr-map {
+  position:absolute; top:92px; left:0; right:0; bottom:0;
+  z-index:1;
+}
+#vr-svg {
+  position:absolute; inset:0; width:100%; height:100%;
+  pointer-events:none; overflow:visible;
+}
+
+/* lines */
+.vr-ln-main  { fill:none; stroke:#000; stroke-width:1; opacity:0; animation:vrLnIn .5s ease forwards; }
+.vr-ln-cross { fill:none; stroke-width:.9; stroke-dasharray:4 8; opacity:0; animation:vrLnIn .5s ease forwards; }
+.vr-ln-editorial { stroke:#555; }
+.vr-ln-art        { stroke:#222; }
+.vr-ln-structured { stroke:#777; }
+.vr-ln-brand      { stroke:#444; }
+@keyframes vrLnIn { from{opacity:0} to{opacity:1} }
+
+/* nodes */
+.vr-node {
+  position:absolute; transform:translate(-50%,-50%);
+  opacity:0; animation:vrPopIn .4s cubic-bezier(.34,1.56,.64,1) forwards;
+  user-select:none;
+}
+@keyframes vrPopIn {
+  from { opacity:0; transform:translate(-50%,-50%) scale(.35); }
+  to   { opacity:1; transform:translate(-50%,-50%) scale(1); }
+}
+
+/* centre node */
+#vr-nc { z-index:30; }
+.vr-c-box {
+  width:130px; height:130px; border:1.5px solid #000;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  background:#fff;
+}
+.vr-c-lbl { font-family:'DotGothic16',sans-serif; font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:rgba(0,0,0,.35); margin-bottom:5px; }
+.vr-c-nm  { font-family:'CHAOS16',sans-serif; font-size:36px; color:#000; line-height:1; }
+.vr-c-sub { font-family:'DotGothic16',sans-serif; font-size:9px; letter-spacing:.1em; text-transform:uppercase; color:rgba(0,0,0,.30); margin-top:7px; text-align:center; line-height:1.7; }
+
+/* project nodes */
+.vr-node-p {
+  display:flex; flex-direction:column;
+  align-items:center; gap:8px;
+  cursor:grab; z-index:20;
+}
+.vr-node-p.dragging { cursor:grabbing; z-index:50; }
+
+.vr-iw {
+  width:var(--sz,115px); height:var(--sz,115px);
+  border:1px solid #000; overflow:hidden; position:relative;
+  background:#e8e8e8; flex-shrink:0;
+  transition:transform .18s ease;
+}
+.vr-iw img {
+  width:100%; height:100%; object-fit:cover; display:block;
+  pointer-events:none; transition:transform .22s ease;
+}
+.vr-iw .vr-overlay {
+  position:absolute; inset:0; z-index:3;
+  background:rgba(255,255,255,0.22);
+  pointer-events:none; transition:background .2s ease;
+}
+.vr-node-p:hover .vr-iw .vr-overlay { background:rgba(255,255,255,0); }
+.vr-iw-num {
+  position:absolute; top:7px; left:7px; z-index:5;
+  width:20px; height:20px; background:#000; color:#fff;
+  font-family:'DotGothic16',sans-serif; font-size:9px;
+  display:flex; align-items:center; justify-content:center;
+  pointer-events:none;
+}
+.vr-node-p:hover .vr-iw     { transform:scale(1.06); }
+.vr-node-p:hover .vr-iw img { transform:scale(1.04); }
+
+.vr-n-title {
+  font-family:'CHAOS16',sans-serif; font-size:var(--fsz,15px);
+  color:#000; white-space:nowrap; max-width:180px;
+  overflow:hidden; text-overflow:ellipsis;
+  letter-spacing:.02em; line-height:1;
+  pointer-events:none; transition:opacity .18s;
+}
+.vr-n-cat {
+  font-family:'DotGothic16',sans-serif; font-size:var(--fszs,11px);
+  letter-spacing:.13em; text-transform:uppercase;
+  color:rgba(0,0,0,.42); white-space:nowrap; pointer-events:none;
+}
+.vr-node-p:hover .vr-n-title { opacity:.5; }
+
+/* junction dot */
+.vr-junc {
+  position:absolute; width:7px; height:7px; background:#000;
+  transform:translate(-50%,-50%); z-index:19; pointer-events:none;
+  opacity:0; animation:vrPopIn .3s ease forwards;
+}
+
+/* tooltip */
+#vr-tip {
+  position:absolute; z-index:9999; width:220px;
+  border:1px solid #000; background:#fff;
+  pointer-events:none; opacity:0; transform:translateY(6px);
+  transition:opacity .15s, transform .15s;
+}
+#vr-tip.show { opacity:1; transform:translateY(0); }
+#vr-tip::before { content:''; position:absolute; top:-1px;    right:-1px; width:8px; height:8px; border:1.5px solid #000; border-left:none;  border-bottom:none; }
+#vr-tip::after  { content:''; position:absolute; bottom:-1px; left:-1px;  width:8px; height:8px; border:1.5px solid #000; border-right:none; border-top:none; }
+#vr-tip-img { width:100%; height:130px; object-fit:cover; display:block; border-bottom:1px solid #000; }
+.vr-tb { padding:13px 15px 15px; }
+.vr-tt { font-family:'CHAOS16',sans-serif; font-size:18px; color:#000; line-height:1.2; margin-bottom:4px; }
+.vr-tc { font-family:'DotGothic16',sans-serif; font-size:9px; letter-spacing:.13em; text-transform:uppercase; color:rgba(0,0,0,.38); margin-bottom:12px; }
+.vr-tl { font-family:'DotGothic16',sans-serif; font-size:9px; letter-spacing:.16em; text-transform:uppercase; color:#000; border-bottom:1px solid #000; padding-bottom:1px; }
+
+/* footer */
+.vr-ft-c { position:absolute; bottom:22px; left:50%; transform:translateX(-50%); font-family:'DotGothic16',sans-serif; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:rgba(0,0,0,.45); pointer-events:none; white-space:nowrap; opacity:0; animation:vrFadeIn 1s 2.8s forwards; }
+.vr-ft-r { position:absolute; bottom:22px; right:40px; font-family:'DotGothic16',sans-serif; font-size:11px; letter-spacing:.13em; color:rgba(0,0,0,.45); opacity:0; animation:vrFadeIn 1s 2.8s forwards; }
+.vr-ft-l { position:absolute; bottom:22px; left:40px;  font-family:'DotGothic16',sans-serif; font-size:11px; letter-spacing:.13em; color:rgba(0,0,0,.45); opacity:0; animation:vrFadeIn 1s 2.8s forwards; }
+@keyframes vrFadeIn { to { opacity:1; } }
+</style>
+
+<div id="vr" style="position:relative;width:100%;height:100vh;overflow:hidden;background:#fff;font-family:'DotGothic16',sans-serif;color:#000;">
+
+  <!-- ticker -->
+  <div id="vr-ticker">
+    <div class="vr-ticker-track">
+      <span>Available for hire</span><span class="vr-dot">·</span>
+      <span>Available for hire</span><span class="vr-dot">·</span>
+      <span>Available for hire</span><span class="vr-dot">·</span>
+      <span>Available for hire</span><span class="vr-dot">·</span>
+      <span>Available for hire</span><span class="vr-dot">·</span>
+      <span>Available for hire</span><span class="vr-dot">·</span>
+      <span>Available for hire</span><span class="vr-dot">·</span>
+      <span>Available for hire</span><span class="vr-dot">·</span>
+    </div>
+  </div>
+
+  <!-- header -->
+  <header id="vr-hdr">
+    <div class="vr-hdr-left">
+      <img class="vr-hdr-logo" src="https://framerusercontent.com/images/n1YNd1TskF9dkrvfPnELuHqhSiY.png" alt="Vitto">
+      <span class="vr-hdr-name">Vittoria Fornari</span>
+    </div>
+    <nav class="vr-hdr-links">
+      <a href="https://vittogd.framer.website/aboutme">About</a>
+      <div class="vr-hdr-div"></div>
+      <a href="https://vittogd.framer.website/#services">Fun Projects</a>
+      <div class="vr-hdr-div"></div>
+      <a href="mailto:vittoriaafornari003@gmail.com">Contact</a>
+      <div class="vr-hdr-div"></div>
+      <a href="https://www.instagram.com/vitto_gd" target="_blank">Instagram</a>
+      <a href="https://www.linkedin.com/in/vittoria-fornari-6405b0313" target="_blank">LinkedIn</a>
+      <a href="https://www.behance.net/vittoriafornari2" target="_blank">Behance</a>
     </nav>
-
-    <button class="nav-toggle" aria-label="Menu">☰</button>
+    <button id="vr-burger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </header>
 
-  <!-- ===================== CANVAS / CONSTELLATION ===================== -->
-  <main id="top">
-    <section class="stage" id="works">
-      <div class="world" id="world">
-        <svg class="links" id="links" aria-hidden="true"></svg>
+  <!-- mobile drawer -->
+  <nav id="vr-drawer">
+    <a href="https://vittogd.framer.website/#about">About</a>
+    <a href="https://vittogd.framer.website/#services">Fun Projects</a>
+    <a href="mailto:vittoriaafornari003@gmail.com">Contact</a>
+    <a href="https://www.instagram.com/vitto_gd" target="_blank">Instagram</a>
+    <a href="https://www.linkedin.com/in/vittoria-fornari-6405b0313" target="_blank">LinkedIn</a>
+    <a href="https://www.behance.net/vittoriafornari2" target="_blank">Behance</a>
+  </nav>
 
-        <!-- Center card -->
-        <a class="node node--center" data-center href="#about">
-          <span class="kicker">HELLO I'M</span>
-          <span class="hello">Vitto</span>
-          <span class="kicker">I'M A VISUAL DESIGNER</span>
-        </a>
-
-        <!-- Project nodes are injected by js/main.js -->
+  <!-- map -->
+  <div id="vr-map">
+    <svg id="vr-svg"></svg>
+    <div class="vr-node" id="vr-nc" style="animation-delay:.05s">
+      <div class="vr-c-box">
+        <span class="vr-c-lbl">Hello I'm</span>
+        <span class="vr-c-nm">Vitto</span>
+        <span class="vr-c-sub">I'm a Visual<br>Designer</span>
       </div>
-    </section>
-
-    <!-- Stage footer bar -->
-    <div class="stage-bar">
-      <span>8 Works</span>
-      <span class="hint">DRAG TO EXPLORE · CLICK TO OPEN</span>
-      <span>2022 — 2025</span>
     </div>
-  </main>
+  </div>
 
-  <!-- ===================== ABOUT ===================== -->
-  <section class="about" id="about">
-    <p class="about-kicker">ABOUT</p>
-    <h2 class="about-title">Hello, I'm <span class="script">Vittoria Fornari</span></h2>
-    <p class="about-body">
-      I'm a visual designer working across editorial, UX/UI, illustration and motion.
-      I like blending creativity and technique to give ideas a clear, playful form —
-      from print layouts and brand systems to digital products.
-    </p>
-    <p class="about-status"><span class="dot"></span> Available for hire</p>
-  </section>
-
-  <!-- ===================== CONTACT ===================== -->
-  <section class="contact" id="contact">
-    <h2 class="chat">LET'S<br />HAVE A<br />CHAT</h2>
-    <a class="email" href="mailto:vittoriaafornari003@gmail.com">vittoriaafornari003@gmail.com</a>
-    <div class="socials">
-      <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram ↗</a>
-      <a href="https://linkedin.com/" target="_blank" rel="noopener">LinkedIn ↗</a>
-      <a href="https://behance.net/" target="_blank" rel="noopener">Behance ↗</a>
-      <a href="https://x.com/" target="_blank" rel="noopener">X ↗</a>
+  <!-- tooltip -->
+  <div id="vr-tip">
+    <img id="vr-tip-img" src="" alt="">
+    <div class="vr-tb">
+      <div class="vr-tt" id="vr-tip-t"></div>
+      <div class="vr-tc" id="vr-tip-c"></div>
+      <span class="vr-tl">Open project →</span>
     </div>
-  </section>
+  </div>
 
-  <!-- ===================== FOOTER ===================== -->
-  <footer class="site-footer">
-    <span>© 2025 Vittoria Fornari</span>
-    <span>Visual Designer</span>
-  </footer>
+  <div class="vr-ft-c">Drag to explore · click to open</div>
+  <div class="vr-ft-r">2022 – 2025</div>
+  <div class="vr-ft-l">8 Works</div>
+</div>
 
-  <script src="js/main.js"></script>
+<script>
+(function(){
+const ROOT = document.getElementById('vr');
+const MAP  = document.getElementById('vr-map');
+const SVG  = document.getElementById('vr-svg');
+const TIP  = document.getElementById('vr-tip');
+const NC   = document.getElementById('vr-nc');
+
+const PROJECTS = [
+  { n:1, id:'maggo',        title:'Maggo',               cat:'Editorial / Social',   type:['editorial','brand'],      url:'https://vittogd.framer.website/maggo',                            img:'https://framerusercontent.com/images/26M6StWcFL1Fl0u8hAJlO007U.png?width=800', angle:-100 },
+  { n:2, id:'enifolia',     title:'Enifolia',             cat:'UX & UI Design',       type:['structured'],             url:'https://vittogd.framer.website/enifolia',                         img:'https://framerusercontent.com/images/u8BYeJnfn4wbC1dGOwKrur0E.jpg?width=800',  angle:-45  },
+  { n:3, id:'clash',        title:'The Clash × Basquiat', cat:'Album / Illustration', type:['art'],                    url:'https://vittogd.framer.website/the-clash-x-jean-michel-basquiat', img:'https://framerusercontent.com/images/FtvS9SO2W75TNq3vzvjUWz0Pdw.png?width=800', angle:5    },
+  { n:4, id:'scomodo',      title:'Scomodo',              cat:'Advertising',          type:['brand'],                  url:'https://vittogd.framer.website/scomodo',                          img:'https://framerusercontent.com/images/DQqPzXHi8tp81qmWn2J5eMw7MR8.png?width=800',angle:55   },
+  { n:5, id:'bozza',        title:'Bozza',                cat:'Editorial',            type:['editorial'],              url:'https://vittogd.framer.website/bozza',                            img:'https://framerusercontent.com/images/EniR9ILXsbCLInYz6tn98mq4fp4.jpg?width=800', angle:100  },
+  { n:6, id:'infographics', title:'Annual Report',        cat:'Infographic',          type:['structured','editorial'], url:'https://vittogd.framer.website/annual-report-infographics',       img:'https://framerusercontent.com/images/dXNZjEIirFbgIf7Wgq7iqlx6UVE.jpg?width=800', angle:148  },
+  { n:7, id:'naturamatic',  title:'Naturamatic',          cat:'Editorial',            type:['editorial'],              url:'https://vittogd.framer.website/naturamatic',                      img:'https://framerusercontent.com/images/p1gbaT71k2NsmCI4lG3TCBs5SI.jpg?width=800',  angle:-170 },
+  { n:8, id:'guardians',    title:'Guardians Vol.2',      cat:'Motion Graphics',      type:['art'],                    url:'https://vittogd.framer.website/guardians-of-the-galaxy',          img:'https://framerusercontent.com/images/JCJOB6WYnzHxRAxw8NlyyW5MPJ0.png?width=800', angle:-140 },
+];
+
+function buildCrossLinks() {
+  const typeMap = {};
+  PROJECTS.forEach(p => p.type.forEach(t => { if(!typeMap[t]) typeMap[t]=[]; typeMap[t].push(p.id); }));
+  const seen = new Set(), links = [];
+  Object.entries(typeMap).forEach(([type, ids]) => {
+    for(let i=0;i<ids.length;i++) for(let j=i+1;j<ids.length;j++) {
+      const key=[ids[i],ids[j]].sort().join('--');
+      if(!seen.has(key)){ seen.add(key); links.push({a:ids[i],b:ids[j],type}); }
+    }
+  });
+  return links;
+}
+const CROSS = buildCrossLinks();
+
+function getScale()  { return Math.min(1, Math.min(MAP.offsetWidth, MAP.offsetHeight) / 700); }
+function nodeSize()  { return Math.round(115 * getScale()); }
+function titleSize() { return Math.max(11, Math.round(15 * getScale())); }
+function catSize()   { return Math.max(9,  Math.round(11 * getScale())); }
+function orbitRad()  {
+  const sz = nodeSize();
+  const minR = (sz * 1.5) / (2 * Math.sin(Math.PI / 8));
+  const maxR = Math.min(300, MAP.offsetWidth * 0.36, MAP.offsetHeight * 0.40);
+  return Math.max(minR, maxR);
+}
+
+const positions = {};
+function defaultXY(p) {
+  const a = p.angle * Math.PI / 180;
+  const r = orbitRad() - (Math.sin(a) > 0 ? 30 : 0);
+  return { x: MAP.offsetWidth/2 + r*Math.cos(a), y: MAP.offsetHeight/2 + r*Math.sin(a) };
+}
+
+const nodeEls={}, juncEls={}, lineEls={}, crossEls={};
+
+function build() {
+  SVG.innerHTML = '';
+  MAP.querySelectorAll('.vr-node-p,.vr-junc').forEach(n => n.remove());
+  SVG.setAttribute('viewBox', `0 0 ${MAP.offsetWidth} ${MAP.offsetHeight}`);
+  const cx = MAP.offsetWidth/2, cy = MAP.offsetHeight/2;
+  NC.style.left = `${cx}px`; NC.style.top = `${cy}px`;
+  const sz=nodeSize(), ft=titleSize(), fc=catSize();
+
+  PROJECTS.forEach((p,i) => {
+    positions[p.id] = defaultXY(p);
+    const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('class','vr-ln-main');
+    path.style.animationDelay = `${0.16+i*0.06}s`;
+    SVG.appendChild(path); lineEls[p.id] = path;
+
+    const junc = document.createElement('div');
+    junc.className = 'vr-junc';
+    junc.style.animationDelay = `${0.22+i*0.06}s`;
+    MAP.appendChild(junc); juncEls[p.id] = junc;
+  });
+
+  CROSS.forEach((link,i) => {
+    const path = document.createElementNS('http://www.w3.org/2000/svg','path');
+    path.setAttribute('class',`vr-ln-cross vr-ln-${link.type}`);
+    path.style.animationDelay = `${0.9+i*0.06}s`;
+    SVG.appendChild(path); crossEls[`${link.a}--${link.b}`] = path;
+  });
+
+  PROJECTS.forEach((p,i) => {
+    const node = document.createElement('div');
+    node.className = 'vr-node vr-node-p';
+    node.style.setProperty('--sz',   sz+'px');
+    node.style.setProperty('--fsz',  ft+'px');
+    node.style.setProperty('--fszs', fc+'px');
+    node.style.animationDelay = `${0.22+i*0.06}s`;
+    const cosA = Math.cos(p.angle*Math.PI/180);
+    const align = Math.abs(cosA)>0.45?(cosA>0?'left':'right'):'center';
+    node.style.flexDirection = 'column';
+    node.innerHTML = `
+      <div class="vr-n-title" style="text-align:${align}">${p.title}</div>
+      <div class="vr-n-cat"   style="text-align:${align}">${p.cat}</div>
+      <div class="vr-iw">
+        <div class="vr-overlay"></div>
+        <div class="vr-iw-num">${String(p.n).padStart(2,'0')}</div>
+        <img src="${p.img}" alt="${p.title}" loading="lazy">
+      </div>`;
+
+    let startX=0, startY=0;
+    const onDown=(cx,cy)=>{ startX=cx; startY=cy; hideTip(); startDrag(p.id,node,cx,cy); };
+    node.addEventListener('mousedown',e=>{ if(e.button!==0)return; e.preventDefault(); onDown(e.clientX,e.clientY); });
+    node.addEventListener('touchstart',e=>{ e.preventDefault(); onDown(e.touches[0].clientX,e.touches[0].clientY); },{passive:false});
+    node.addEventListener('click',e=>{ const dx=e.clientX-startX,dy=e.clientY-startY; if(Math.sqrt(dx*dx+dy*dy)<6) window.open(p.url,'_blank'); });
+    node.addEventListener('mouseenter',e=>{ if(!isDragging) showTip(p,e); });
+    node.addEventListener('mouseleave',hideTip);
+    node.addEventListener('mousemove',e=>{ if(!isDragging) moveTip(e); });
+    MAP.appendChild(node); nodeEls[p.id]=node;
+  });
+
+  updatePositions();
+}
+
+function updatePositions() {
+  const cx=MAP.offsetWidth/2, cy=MAP.offsetHeight/2;
+  PROJECTS.forEach(p => {
+    const {x,y}=positions[p.id];
+    const node=nodeEls[p.id], junc=juncEls[p.id], line=lineEls[p.id];
+    if(!node)return;
+    node.style.left=`${x}px`; node.style.top=`${y}px`;
+    junc.style.left=`${x}px`; junc.style.top=`${y}px`;
+    const mx=(cx+x)/2+(y-cy)*0.06, my=(cy+y)/2-(x-cx)*0.06;
+    line.setAttribute('d',`M${cx.toFixed(1)},${cy.toFixed(1)} Q${mx.toFixed(1)},${my.toFixed(1)} ${x.toFixed(1)},${y.toFixed(1)}`);
+  });
+  CROSS.forEach(link => {
+    const a=positions[link.a], b=positions[link.b], path=crossEls[`${link.a}--${link.b}`];
+    if(!a||!b||!path)return;
+    const mx=(a.x+b.x)/2+(b.y-a.y)*0.22, my=(a.y+b.y)/2-(b.x-a.x)*0.22;
+    path.setAttribute('d',`M${a.x.toFixed(1)},${a.y.toFixed(1)} Q${mx.toFixed(1)},${my.toFixed(1)} ${b.x.toFixed(1)},${b.y.toFixed(1)}`);
+  });
+}
+
+let isDragging=false, dragId=null, dragNode=null, dragOffX=0, dragOffY=0, rafId=null;
+function startDrag(id,node,cx,cy){
+  isDragging=true; dragId=id; dragNode=node; node.classList.add('dragging');
+  const rect=MAP.getBoundingClientRect(), pos=positions[id];
+  dragOffX=cx-rect.left-pos.x; dragOffY=cy-rect.top-pos.y;
+}
+function onMove(cx,cy){
+  if(!isDragging)return;
+  const rect=MAP.getBoundingClientRect(), sz=nodeSize()/2;
+  positions[dragId]={
+    x:Math.max(sz,Math.min(MAP.offsetWidth-sz,  cx-rect.left-dragOffX)),
+    y:Math.max(sz,Math.min(MAP.offsetHeight-sz, cy-rect.top-dragOffY)),
+  };
+  if(!rafId) rafId=requestAnimationFrame(()=>{ updatePositions(); rafId=null; });
+}
+function endDrag(){
+  if(!isDragging)return;
+  dragNode.classList.remove('dragging');
+  isDragging=false; dragId=null; dragNode=null;
+  cancelAnimationFrame(rafId); rafId=null; updatePositions();
+}
+document.addEventListener('mousemove',e=>onMove(e.clientX,e.clientY));
+document.addEventListener('mouseup',endDrag);
+document.addEventListener('touchmove',e=>{ if(!isDragging)return; e.preventDefault(); onMove(e.touches[0].clientX,e.touches[0].clientY); },{passive:false});
+document.addEventListener('touchend',endDrag);
+
+function showTip(p,e){
+  document.getElementById('vr-tip-img').src=p.img;
+  document.getElementById('vr-tip-t').textContent=p.title;
+  document.getElementById('vr-tip-c').textContent=p.cat;
+  moveTip(e); TIP.classList.add('show');
+}
+function moveTip(e){
+  const rootRect=ROOT.getBoundingClientRect();
+  const x=e.clientX-rootRect.left+24, y=e.clientY-rootRect.top-100;
+  TIP.style.left=`${Math.min(x,ROOT.offsetWidth-228)}px`;
+  TIP.style.top=`${Math.max(8,y)}px`;
+}
+function hideTip(){ TIP.classList.remove('show'); }
+
+// burger menu
+const burger  = document.getElementById('vr-burger');
+const drawer  = document.getElementById('vr-drawer');
+burger.addEventListener('click', () => {
+  burger.classList.toggle('open');
+  drawer.classList.toggle('open');
+});
+// close drawer when any link clicked
+drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  burger.classList.remove('open');
+  drawer.classList.remove('open');
+}));
+
+build();
+window.addEventListener('resize', build);
+})();
+</script>
+
 </body>
 </html>
