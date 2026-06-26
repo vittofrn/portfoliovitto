@@ -62,7 +62,7 @@
 
 /* ── HEADER ── */
 #vr-hdr {
-  position:absolute; top:28px; left:0; right:0; z-index:100;
+  position:absolute; top:0; left:0; right:0; z-index:100;
   height:64px; background:#fff;
   display:flex; align-items:center; justify-content:space-between;
   padding:0 40px;
@@ -101,7 +101,7 @@
 /* mobile drawer */
 #vr-drawer {
   display:none;
-  position:absolute; top:92px; left:0; right:0;
+  position:absolute; top:64px; left:0; right:0;
   background:#fff; z-index:90;
   border-bottom:1px solid rgba(0,0,0,.08);
   padding:20px 40px 28px;
@@ -131,7 +131,7 @@
 
 /* ── MAP CANVAS ── */
 #vr-map {
-  position:absolute; top:92px; left:0; right:0; bottom:0;
+  position:absolute; top:64px; left:0; right:0; bottom:0;
   z-index:1;
 }
 #vr-svg {
@@ -249,20 +249,6 @@
 </style>
 
 <div id="vr" style="position:relative;width:100%;height:100vh;overflow:hidden;background:#fff;font-family:'DotGothic16',sans-serif;color:#000;">
-
-  <!-- ticker -->
-  <div id="vr-ticker">
-    <div class="vr-ticker-track">
-      <span>Available for hire</span><span class="vr-dot">·</span>
-      <span>Available for hire</span><span class="vr-dot">·</span>
-      <span>Available for hire</span><span class="vr-dot">·</span>
-      <span>Available for hire</span><span class="vr-dot">·</span>
-      <span>Available for hire</span><span class="vr-dot">·</span>
-      <span>Available for hire</span><span class="vr-dot">·</span>
-      <span>Available for hire</span><span class="vr-dot">·</span>
-      <span>Available for hire</span><span class="vr-dot">·</span>
-    </div>
-  </div>
 
   <!-- header -->
   <header id="vr-hdr">
