@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vittoria Fornari — Portfolio</title>
+  <meta name="description" content="Portfolio of Vittoria Fornari, Visual Designer. Editorial, UX/UI, illustration, motion and more." />
+
+  <link rel="icon" type="image/png" href="assets/img/logo.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=DotGothic16&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ===================== HEADER ===================== -->
+  <header class="site-header">
+    <a class="brand" href="#top">
+      <img class="brand-face" src="assets/img/logo.png" alt="Vittoria Fornari" />
+      <span class="brand-name">Vittoria Fornari</span>
+    </a>
+
+    <nav class="nav">
+      <a href="#about">About</a>
+      <a href="#works">Fun Projects</a>
+      <a href="#contact">Contact</a>
+      <span class="nav-sep">|</span>
+      <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://behance.net/" target="_blank" rel="noopener">Behance</a>
+    </nav>
+
+    <button class="nav-toggle" aria-label="Menu">☰</button>
+  </header>
+
+  <!-- ===================== CANVAS / CONSTELLATION ===================== -->
+  <main id="top">
+    <section class="stage" id="works">
+      <div class="world" id="world">
+        <svg class="links" id="links" aria-hidden="true"></svg>
+
+        <!-- Center card -->
+        <a class="node node--center" data-center href="#about">
+          <span class="kicker">HELLO I'M</span>
+          <span class="hello">Vitto</span>
+          <span class="kicker">I'M A VISUAL DESIGNER</span>
+        </a>
+
+        <!-- Project nodes are injected by js/main.js -->
+      </div>
+    </section>
+
+    <!-- Stage footer bar -->
+    <div class="stage-bar">
+      <span>8 Works</span>
+      <span class="hint">DRAG TO EXPLORE · CLICK TO OPEN</span>
+      <span>2022 — 2025</span>
+    </div>
+  </main>
+
+  <!-- ===================== ABOUT ===================== -->
+  <section class="about" id="about">
+    <p class="about-kicker">ABOUT</p>
+    <h2 class="about-title">Hello, I'm <span class="script">Vittoria Fornari</span></h2>
+    <p class="about-body">
+      I'm a visual designer working across editorial, UX/UI, illustration and motion.
+      I like blending creativity and technique to give ideas a clear, playful form —
+      from print layouts and brand systems to digital products.
+    </p>
+    <p class="about-status"><span class="dot"></span> Available for hire</p>
+  </section>
+
+  <!-- ===================== CONTACT ===================== -->
+  <section class="contact" id="contact">
+    <h2 class="chat">LET'S<br />HAVE A<br />CHAT</h2>
+    <a class="email" href="mailto:vittoriaafornari003@gmail.com">vittoriaafornari003@gmail.com</a>
+    <div class="socials">
+      <a href="https://instagram.com/" target="_blank" rel="noopener">Instagram ↗</a>
+      <a href="https://linkedin.com/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="https://behance.net/" target="_blank" rel="noopener">Behance ↗</a>
+      <a href="https://x.com/" target="_blank" rel="noopener">X ↗</a>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer">
+    <span>© 2025 Vittoria Fornari</span>
+    <span>Visual Designer</span>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
