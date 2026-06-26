@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vittoria Fornari — Portfolio</title>
   <meta name="description" content="Portfolio of Vittoria Fornari, Visual Designer. Editorial, UX/UI, illustration, motion and more." />
-  <link rel="icon" type="image/png" href="https://framerusercontent.com/images/n1YNd1TskF9dkrvfPnELuHqhSiY.png" />
+  <link rel="icon" type="image/png" href="assets/proj/logo.png" />
 </head>
 <body style="margin:0">
 
@@ -267,13 +267,13 @@
   <!-- header -->
   <header id="vr-hdr">
     <div class="vr-hdr-left">
-      <img class="vr-hdr-logo" src="https://framerusercontent.com/images/n1YNd1TskF9dkrvfPnELuHqhSiY.png" alt="Vitto">
+      <img class="vr-hdr-logo" src="assets/proj/logo.png" alt="Vitto">
       <span class="vr-hdr-name">Vittoria Fornari</span>
     </div>
     <nav class="vr-hdr-links">
-      <a href="https://vittogd.framer.website/aboutme">About</a>
+      <a href="index.html">About</a>
       <div class="vr-hdr-div"></div>
-      <a href="https://vittogd.framer.website/#services">Fun Projects</a>
+      <a href="index.html">Fun Projects</a>
       <div class="vr-hdr-div"></div>
       <a href="mailto:vittoriaafornari003@gmail.com">Contact</a>
       <div class="vr-hdr-div"></div>
@@ -288,8 +288,8 @@
 
   <!-- mobile drawer -->
   <nav id="vr-drawer">
-    <a href="https://vittogd.framer.website/#about">About</a>
-    <a href="https://vittogd.framer.website/#services">Fun Projects</a>
+    <a href="index.html">About</a>
+    <a href="index.html">Fun Projects</a>
     <a href="mailto:vittoriaafornari003@gmail.com">Contact</a>
     <a href="https://www.instagram.com/vitto_gd" target="_blank">Instagram</a>
     <a href="https://www.linkedin.com/in/vittoria-fornari-6405b0313" target="_blank">LinkedIn</a>
@@ -332,14 +332,14 @@ const TIP  = document.getElementById('vr-tip');
 const NC   = document.getElementById('vr-nc');
 
 const PROJECTS = [
-  { n:1, id:'maggo',        title:'Maggo',               cat:'Editorial / Social',   type:['editorial','brand'],      url:'https://vittogd.framer.website/maggo',                            img:'https://framerusercontent.com/images/26M6StWcFL1Fl0u8hAJlO007U.png?width=800', angle:-100 },
-  { n:2, id:'enifolia',     title:'Enifolia',             cat:'UX & UI Design',       type:['structured'],             url:'https://vittogd.framer.website/enifolia',                         img:'https://framerusercontent.com/images/u8BYeJnfn4wbC1dGOwKrur0E.jpg?width=800',  angle:-45  },
-  { n:3, id:'clash',        title:'The Clash × Basquiat', cat:'Album / Illustration', type:['art'],                    url:'https://vittogd.framer.website/the-clash-x-jean-michel-basquiat', img:'https://framerusercontent.com/images/FtvS9SO2W75TNq3vzvjUWz0Pdw.png?width=800', angle:5    },
-  { n:4, id:'scomodo',      title:'Scomodo',              cat:'Advertising',          type:['brand'],                  url:'https://vittogd.framer.website/scomodo',                          img:'https://framerusercontent.com/images/DQqPzXHi8tp81qmWn2J5eMw7MR8.png?width=800',angle:55   },
-  { n:5, id:'bozza',        title:'Bozza',                cat:'Editorial',            type:['editorial'],              url:'https://vittogd.framer.website/bozza',                            img:'https://framerusercontent.com/images/EniR9ILXsbCLInYz6tn98mq4fp4.jpg?width=800', angle:100  },
-  { n:6, id:'infographics', title:'Annual Report',        cat:'Infographic',          type:['structured','editorial'], url:'https://vittogd.framer.website/annual-report-infographics',       img:'https://framerusercontent.com/images/dXNZjEIirFbgIf7Wgq7iqlx6UVE.jpg?width=800', angle:148  },
-  { n:7, id:'naturamatic',  title:'Naturamatic',          cat:'Editorial',            type:['editorial'],              url:'https://vittogd.framer.website/naturamatic',                      img:'https://framerusercontent.com/images/p1gbaT71k2NsmCI4lG3TCBs5SI.jpg?width=800',  angle:-170 },
-  { n:8, id:'guardians',    title:'Guardians Vol.2',      cat:'Motion Graphics',      type:['art'],                    url:'https://vittogd.framer.website/guardians-of-the-galaxy',          img:'https://framerusercontent.com/images/JCJOB6WYnzHxRAxw8NlyyW5MPJ0.png?width=800', angle:-140 },
+  { n:1, id:'maggo',        title:'Maggo',               cat:'Editorial / Social',   type:['editorial','brand'],      url:'projects/maggo.html',                            img:'assets/proj/maggo-cover.jpg', angle:-100 },
+  { n:2, id:'enifolia',     title:'Enifolia',             cat:'UX & UI Design',       type:['structured'],             url:'projects/enifolia.html',                         img:'assets/proj/enifolia-cover.jpg',  angle:-45  },
+  { n:3, id:'clash',        title:'The Clash × Basquiat', cat:'Album / Illustration', type:['art'],                    url:'projects/clash.html', img:'assets/proj/clash-cover.jpg', angle:5    },
+  { n:4, id:'scomodo',      title:'Scomodo',              cat:'Advertising',          type:['brand'],                  url:'projects/scomodo.html',                          img:'assets/proj/scomodo-cover.jpg',angle:55   },
+  { n:5, id:'bozza',        title:'Bozza',                cat:'Editorial',            type:['editorial'],              url:'projects/bozza.html',                            img:'assets/proj/bozza-cover.jpg', angle:100  },
+  { n:6, id:'infographics', title:'Annual Report',        cat:'Infographic',          type:['structured','editorial'], url:'projects/annual-report.html',       img:'assets/proj/annual-report-cover.jpg', angle:148  },
+  { n:7, id:'naturamatic',  title:'Naturamatic',          cat:'Editorial',            type:['editorial'],              url:'projects/naturamatic.html',                      img:'assets/proj/naturamatic-cover.jpg',  angle:-170 },
+  { n:8, id:'guardians',    title:'Guardians Vol.2',      cat:'Motion Graphics',      type:['art'],                    url:'projects/guardians.html',          img:'assets/proj/guardians-cover.jpg', angle:-140 },
 ];
 
 function buildCrossLinks() {
