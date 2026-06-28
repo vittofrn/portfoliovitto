@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fun Projects — Vittoria Fornari</title>
+<meta name="description" content="Fun projects & personal art by Vittoria Fornari.">
+<link rel="icon" type="image/png" href="assets/proj/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family:'CHAOS16'; src:url('fonts/chaos16.woff2') format('woff2'); font-weight:normal; font-style:normal; font-display:swap; }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#fff;color:#000;font-family:'DotGothic16',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+a{color:inherit;text-decoration:none;}
+
+/* hero map root */
+#fp{position:relative;width:100%;height:100vh;overflow:hidden;background:#fff;}
+
+/* header */
+#fp-hdr{position:absolute;top:0;left:0;right:0;z-index:100;height:64px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 40px;}
+.fp-left{display:flex;align-items:center;gap:10px;}
+.fp-left img{width:32px;height:32px;border-radius:50%;}
+.fp-name{font-family:'CHAOS16',sans-serif;font-size:20px;letter-spacing:.04em;}
+.fp-links{display:flex;align-items:center;gap:28px;}
+.fp-links a{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(0,0,0,.45);transition:color .15s;}
+.fp-links a:hover,.fp-links a.active{color:#000;}
+#fp-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;z-index:200;}
+#fp-burger span{display:block;width:22px;height:1.5px;background:#000;transition:transform .25s,opacity .25s;}
+#fp-burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+#fp-burger.open span:nth-child(2){opacity:0;}
+#fp-burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+#fp-drawer{display:none;position:absolute;top:64px;left:0;right:0;background:#fff;z-index:90;border-bottom:1px solid rgba(0,0,0,.08);padding:20px 40px 28px;flex-direction:column;gap:18px;}
+#fp-drawer.open{display:flex;}
+#fp-drawer a{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:rgba(0,0,0,.55);}
+@media(max-width:680px){#fp-hdr{padding:0 20px;}.fp-links{display:none;}#fp-burger{display:flex;}.fp-name{font-size:16px;}}
+
+/* map */
+#fp-map{position:absolute;top:64px;left:0;right:0;bottom:0;z-index:1;}
+#fp-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;}
+.fp-ln{fill:none;stroke:#000;stroke-width:1;stroke-dasharray:4 7;opacity:0;animation:fpln .5s ease forwards;}
+@keyframes fpln{to{opacity:.7}}
+.fp-node{position:absolute;transform:translate(-50%,-50%);opacity:0;animation:fppop .4s cubic-bezier(.34,1.56,.64,1) forwards;user-select:none;}
+@keyframes fppop{from{opacity:0;transform:translate(-50%,-50%) scale(.4)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+#fp-nc{z-index:30;}
+.fp-c-box{width:150px;height:130px;border:1.5px solid #000;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff;}
+.fp-c-lbl{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(0,0,0,.35);}
+.fp-c-nm{font-family:'CHAOS16',sans-serif;font-size:26px;line-height:1.05;text-align:center;margin:6px 0;}
+.fp-c-sub{font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(0,0,0,.3);}
+.fp-node-p{display:flex;flex-direction:column;align-items:center;gap:8px;cursor:grab;z-index:20;}
+.fp-node-p.dragging{cursor:grabbing;z-index:50;}
+.fp-iw{width:130px;height:130px;border:1px solid #000;overflow:hidden;position:relative;background:#e8e8e8;transition:transform .18s;}
+.fp-iw img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;transition:transform .22s;}
+.fp-iw .ov{position:absolute;inset:0;background:rgba(255,255,255,.18);transition:background .2s;pointer-events:none;}
+.fp-node-p:hover .fp-iw .ov{background:rgba(255,255,255,0);}
+.fp-iw .num{position:absolute;top:7px;left:7px;width:20px;height:20px;background:#000;color:#fff;font-size:9px;display:flex;align-items:center;justify-content:center;pointer-events:none;}
+.fp-node-p:hover .fp-iw{transform:scale(1.05);}
+.fp-node-p:hover .fp-iw img{transform:scale(1.04);}
+.fp-title{font-family:'CHAOS16',sans-serif;font-size:16px;line-height:1;white-space:nowrap;pointer-events:none;}
+.fp-cat{font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:rgba(0,0,0,.42);white-space:nowrap;pointer-events:none;}
+.fp-junc{position:absolute;width:7px;height:7px;background:#000;transform:translate(-50%,-50%);pointer-events:none;opacity:0;animation:fppop .3s ease forwards;}
+
+/* footer hints */
+.fp-ft{position:absolute;bottom:22px;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(0,0,0,.45);pointer-events:none;opacity:0;animation:fpfade 1s 1.6s forwards;}
+.fp-ft.c{left:50%;transform:translateX(-50%);}.fp-ft.l{left:40px;}.fp-ft.r{right:40px;}
+@keyframes fpfade{to{opacity:1}}
+
+/* lightbox */
+#fp-lb{position:fixed;inset:0;z-index:500;background:rgba(255,255,255,.96);display:none;align-items:center;justify-content:center;flex-direction:column;gap:18px;padding:40px;}
+#fp-lb.open{display:flex;}
+#fp-lb img{max-width:min(92vw,820px);max-height:78vh;border:1px solid #000;object-fit:contain;}
+#fp-lb .cap{font-family:'CHAOS16',sans-serif;font-size:20px;}
+#fp-lb .cls{position:absolute;top:24px;right:30px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;border-bottom:1px solid #000;cursor:pointer;}
+
+/* ── SITE FOOTER ── */
+.site-foot{width:100%;background:#fff;border-top:1px solid #000;font-family:'DotGothic16',sans-serif;color:#000;}
+.ft-wrap{display:grid;grid-template-columns:1fr 1fr;padding:60px 40px 80px;gap:60px;}
+.ft-cta{display:flex;flex-direction:column;gap:20px;}
+.ft-eyebrow{font-size:9px;letter-spacing:.18em;text-transform:uppercase;opacity:.38;}
+.ft-title{font-size:clamp(36px,6vw,72px);line-height:.95;letter-spacing:.02em;}
+.ft-email{font-size:12px;letter-spacing:.06em;border-bottom:1px solid #000;padding-bottom:2px;width:fit-content;transition:opacity .15s;}
+.ft-email:hover{opacity:.45;}
+.ft-right{display:flex;flex-direction:column;justify-content:space-between;gap:30px;}
+.ft-clock{font-size:38px;letter-spacing:.02em;opacity:.1;}
+.ft-links{display:flex;flex-direction:column;}
+.ft-link{font-size:10px;letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #000;padding:12px 0;transition:opacity .15s;}
+.ft-link:hover{opacity:.45;}.ft-link span{opacity:.3;font-size:9px;}
+.ft-bottom{border-top:1px solid #000;padding:18px 40px;display:flex;align-items:center;justify-content:space-between;}
+.ft-copy{font-size:9px;letter-spacing:.14em;text-transform:uppercase;opacity:.3;}
+@media(max-width:680px){.ft-wrap{grid-template-columns:1fr;gap:40px;padding:40px 20px 60px;}.ft-title{font-size:36px;}.ft-clock{font-size:24px;}.ft-bottom{padding:16px 20px;flex-direction:column;gap:6px;align-items:flex-start;}.ft-email{font-size:10px;word-break:break-all;}}
+</style>
+</head>
+<body>
+
+<div id="fp">
+  <header id="fp-hdr">
+    <a class="fp-left" href="index.html"><img src="assets/proj/logo.png" alt="Vitto"><span class="fp-name">Vittoria Fornari</span></a>
+    <nav class="fp-links">
+      <a href="index.html">Home</a>
+      <a href="index.html">Works</a>
+      <a href="funprojects.html" class="active">Fun Projects</a>
+      <a href="aboutme.html">About</a>
+      <a href="https://www.instagram.com/vitto_gd" target="_blank">Instagram</a>
+      <a href="https://www.linkedin.com/in/vittoria-fornari-6405b0313" target="_blank">LinkedIn</a>
+      <a href="https://www.behance.net/vittoriafornari2" target="_blank">Behance</a>
+    </nav>
+    <button id="fp-burger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </header>
+  <nav id="fp-drawer">
+    <a href="index.html">Home</a>
+    <a href="index.html">Works</a>
+    <a href="funprojects.html">Fun Projects</a>
+    <a href="aboutme.html">About</a>
+    <a href="https://www.instagram.com/vitto_gd" target="_blank">Instagram</a>
+    <a href="https://www.linkedin.com/in/vittoria-fornari-6405b0313" target="_blank">LinkedIn</a>
+    <a href="https://www.behance.net/vittoriafornari2" target="_blank">Behance</a>
+  </nav>
+
+  <div id="fp-map">
+    <svg id="fp-svg"></svg>
+    <div class="fp-node" id="fp-nc" style="animation-delay:.05s">
+      <div class="fp-c-box">
+        <span class="fp-c-lbl">For fun</span>
+        <span class="fp-c-nm">Fun<br>Projects</span>
+        <span class="fp-c-sub">Personal art</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="fp-ft l">Personal art</div>
+  <div class="fp-ft c">Drag to explore · click to view</div>
+  <div class="fp-ft r">2022 — 2025</div>
+</div>
+
+<!-- lightbox -->
+<div id="fp-lb">
+  <span class="cls" id="fp-lb-cls">Close ✕</span>
+  <img id="fp-lb-img" src="" alt="">
+  <span class="cap" id="fp-lb-cap"></span>
+</div>
+
+<footer class="site-foot">
+  <div class="ft-wrap">
+    <div class="ft-cta">
+      <span class="ft-eyebrow">Let's work together</span>
+      <div class="ft-title">LET'S<br>HAVE A<br>CHAT</div>
+      <a class="ft-email" href="mailto:vittoriaafornari003@gmail.com">vittoriaafornari003@gmail.com</a>
+    </div>
+    <div class="ft-right">
+      <div class="ft-clock" id="ft-clock">00:00:00</div>
+      <div class="ft-links">
+        <a class="ft-link" href="https://www.instagram.com/vitto_gd" target="_blank" rel="noreferrer">Instagram<span>↗</span></a>
+        <a class="ft-link" href="https://www.linkedin.com/in/vittoria-fornari-6405b0313" target="_blank" rel="noreferrer">LinkedIn<span>↗</span></a>
+        <a class="ft-link" href="https://www.behance.net/vittoriafornari2" target="_blank" rel="noreferrer">Behance<span>↗</span></a>
+        <a class="ft-link" href="https://x.com/jeonvittoo" target="_blank" rel="noreferrer">X<span>↗</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <span class="ft-copy">© 2025 Vittoria Fornari</span>
+    <span class="ft-copy">Visual Designer</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+// ===== EDIT YOUR FUN PROJECTS HERE =====
+// Drop images into assets/fun/ and update title / cat / img / angle.
+const FUN = [
+  { n:1, title:'Stream Starting', cat:'Stream Overlay', img:'assets/fun/stream.png',       angle:-115 },
+  { n:2, title:'Untitled I',      cat:'Illustration',   img:'assets/fun/figures.png',      angle:0 },
+  { n:3, title:'Untitled II',     cat:'Illustration',   img:'assets/fun/faces.png',        angle:120 },
+];
+// =======================================
+
+const MAP=document.getElementById('fp-map'), SVG=document.getElementById('fp-svg'), NC=document.getElementById('fp-nc');
+const pos={}, nodeEls={}, juncEls={}, lineEls={};
+
+function scale(){ return Math.min(1, Math.min(MAP.offsetWidth,MAP.offsetHeight)/700); }
+function nodeSz(){ return Math.round(130*scale()); }
+function orbit(){ const sz=nodeSz(); const minR=(sz*1.7)/(2*Math.sin(Math.PI/Math.max(FUN.length,3))); return Math.max(minR, Math.min(320, MAP.offsetWidth*0.34, MAP.offsetHeight*0.4)); }
+function xy(p){ const a=p.angle*Math.PI/180, r=orbit(); return { x:MAP.offsetWidth/2+r*Math.cos(a), y:MAP.offsetHeight/2+r*Math.sin(a) }; }
+
+function build(){
+  SVG.innerHTML=''; MAP.querySelectorAll('.fp-node-p,.fp-junc').forEach(n=>n.remove());
+  SVG.setAttribute('viewBox',`0 0 ${MAP.offsetWidth} ${MAP.offsetHeight}`);
+  const cx=MAP.offsetWidth/2, cy=MAP.offsetHeight/2;
+  NC.style.left=cx+'px'; NC.style.top=cy+'px';
+  FUN.forEach((p,i)=>{
+    pos[p.n]=xy(p);
+    const ln=document.createElementNS('http://www.w3.org/2000/svg','path');
+    ln.setAttribute('class','fp-ln'); ln.style.animationDelay=`${0.16+i*0.07}s`;
+    SVG.appendChild(ln); lineEls[p.n]=ln;
+    const jc=document.createElement('div'); jc.className='fp-junc'; jc.style.animationDelay=`${0.22+i*0.07}s`;
+    MAP.appendChild(jc); juncEls[p.n]=jc;
+  });
+  FUN.forEach((p,i)=>{
+    const node=document.createElement('div'); node.className='fp-node fp-node-p';
+    node.style.animationDelay=`${0.22+i*0.07}s`;
+    const cosA=Math.cos(p.angle*Math.PI/180);
+    const align=Math.abs(cosA)>0.45?(cosA>0?'flex-start':'flex-end'):'center';
+    node.style.alignItems=align;
+    node.innerHTML=`
+      <div class="fp-iw"><div class="ov"></div><div class="num">${String(p.n).padStart(2,'0')}</div>
+        <img src="${p.img}" alt="${p.title}" loading="lazy" onerror="this.closest('.fp-node-p').style.display='none'"></div>
+      <div class="fp-title">${p.title}</div>
+      <div class="fp-cat">${p.cat}</div>`;
+    let sx=0,sy=0;
+    const down=(x,y)=>{ sx=x; sy=y; startDrag(p.n,node,x,y); };
+    node.addEventListener('mousedown',e=>{ if(e.button!==0)return; e.preventDefault(); down(e.clientX,e.clientY); });
+    node.addEventListener('touchstart',e=>{ down(e.touches[0].clientX,e.touches[0].clientY); },{passive:true});
+    node.addEventListener('click',e=>{ if(Math.hypot(e.clientX-sx,e.clientY-sy)<6) openLb(p); });
+    MAP.appendChild(node); nodeEls[p.n]=node;
+  });
+  update();
+}
+function update(){
+  const cx=MAP.offsetWidth/2, cy=MAP.offsetHeight/2;
+  FUN.forEach(p=>{
+    const {x,y}=pos[p.n], node=nodeEls[p.n], jc=juncEls[p.n], ln=lineEls[p.n]; if(!node)return;
+    node.style.left=x+'px'; node.style.top=y+'px'; jc.style.left=x+'px'; jc.style.top=y+'px';
+    const mx=(cx+x)/2+(y-cy)*0.06, my=(cy+y)/2-(x-cx)*0.06;
+    ln.setAttribute('d',`M${cx},${cy} Q${mx},${my} ${x},${y}`);
+  });
+}
+let drag=false,dId=null,dNode=null,ox=0,oy=0,raf=null;
+function startDrag(id,node,x,y){ drag=true;dId=id;dNode=node;node.classList.add('dragging'); const r=MAP.getBoundingClientRect(); ox=x-r.left-pos[id].x; oy=y-r.top-pos[id].y; }
+function move(x,y){ if(!drag)return; const r=MAP.getBoundingClientRect(), s=nodeSz()/2;
+  pos[dId]={x:Math.max(s,Math.min(MAP.offsetWidth-s,x-r.left-ox)),y:Math.max(s,Math.min(MAP.offsetHeight-s,y-r.top-oy))};
+  if(!raf) raf=requestAnimationFrame(()=>{update();raf=null;}); }
+function up(){ if(!drag)return; dNode.classList.remove('dragging'); drag=false; update(); }
+document.addEventListener('mousemove',e=>move(e.clientX,e.clientY));
+document.addEventListener('mouseup',up);
+document.addEventListener('touchmove',e=>{ if(!drag)return; e.preventDefault(); move(e.touches[0].clientX,e.touches[0].clientY); },{passive:false});
+document.addEventListener('touchend',up);
+
+// lightbox
+const LB=document.getElementById('fp-lb');
+function openLb(p){ document.getElementById('fp-lb-img').src=p.img; document.getElementById('fp-lb-cap').textContent=p.title; LB.classList.add('open'); }
+function closeLb(){ LB.classList.remove('open'); }
+document.getElementById('fp-lb-cls').addEventListener('click',closeLb);
+LB.addEventListener('click',e=>{ if(e.target===LB) closeLb(); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeLb(); });
+
+// burger
+const bg=document.getElementById('fp-burger'), dr=document.getElementById('fp-drawer');
+bg.addEventListener('click',()=>{bg.classList.toggle('open');dr.classList.toggle('open');});
+dr.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{bg.classList.remove('open');dr.classList.remove('open');}));
+
+build();
+window.addEventListener('resize',build);
+
+// footer clock
+function tick(){var el=document.getElementById('ft-clock');if(!el)return;el.textContent=new Date().toLocaleTimeString('it-IT',{timeZone:'Europe/Rome',hour:'2-digit',minute:'2-digit',second:'2-digit'});}
+tick(); setInterval(tick,1000);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Vittoria Fornari</title>
+<meta name="description" content="About Vittoria Fornari — Visual Designer.">
+<link rel="icon" type="image/png" href="assets/proj/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family:'CHAOS16'; src:url('fonts/chaos16.woff2') format('woff2'); font-weight:normal; font-style:normal; font-display:swap; }
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:#fff;color:#000;font-family:'DotGothic16',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+a{color:inherit;text-decoration:none;}
+img{display:block;max-width:100%;}
+.wrap{max-width:1040px;margin:0 auto;padding:0 28px;}
+
+/* header */
+header.h{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid rgba(0,0,0,.08);}
+.h-in{display:flex;align-items:center;justify-content:space-between;height:64px;}
+.brand{display:flex;align-items:center;gap:10px;}
+.brand img{width:30px;height:30px;border-radius:50%;}
+.brand span{font-family:'CHAOS16',sans-serif;font-size:20px;letter-spacing:.04em;}
+.h-nav{display:flex;gap:28px;}
+.h-nav a{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(0,0,0,.5);transition:color .15s;}
+.h-nav a:hover,.h-nav a.active{color:#000;}
+@media(max-width:680px){.h-nav{gap:15px;}.h-nav a:nth-child(n+4){display:none;}}
+
+/* hero */
+.about-hero{padding:90px 0 30px;display:flex;align-items:center;gap:34px;flex-wrap:wrap;}
+.about-hero img{width:120px;height:120px;border-radius:50%;border:1px solid #000;object-fit:cover;}
+.about-hero h1{font-family:'CHAOS16',sans-serif;font-weight:400;font-size:clamp(30px,5.5vw,58px);line-height:1.04;}
+.about-hero .script{font-family:'CHAOS16',sans-serif;}
+
+/* body grid */
+.about-body{display:grid;grid-template-columns:1.2fr 1fr;gap:60px;padding:50px 0 90px;}
+@media(max-width:760px){.about-body{grid-template-columns:1fr;gap:46px;}}
+.lead{font-size:16px;line-height:2;color:#222;max-width:60ch;}
+.block-k{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(0,0,0,.4);margin:38px 0 16px;}
+.loving li{font-size:14px;line-height:2.1;list-style:none;color:#1a1a1a;}
+.loving li::before{content:"/";color:rgba(0,0,0,.35);margin-right:6px;}
+.skills{display:flex;flex-wrap:wrap;gap:8px;}
+.skills span{font-size:10px;letter-spacing:.12em;text-transform:uppercase;border:1px solid #000;padding:7px 12px;}
+.find a{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #000;padding:12px 0;font-size:11px;letter-spacing:.14em;text-transform:uppercase;transition:opacity .15s;}
+.find a:hover{opacity:.45;}
+.find a span{opacity:.3;font-size:9px;}
+
+/* ── SITE FOOTER ── */
+.site-foot{width:100%;background:#fff;border-top:1px solid #000;font-family:'DotGothic16',sans-serif;color:#000;}
+.ft-wrap{display:grid;grid-template-columns:1fr 1fr;padding:60px 40px 80px;gap:60px;}
+.ft-cta{display:flex;flex-direction:column;gap:20px;}
+.ft-eyebrow{font-size:9px;letter-spacing:.18em;text-transform:uppercase;opacity:.38;}
+.ft-title{font-family:'DotGothic16',sans-serif;font-size:clamp(36px,6vw,72px);line-height:.95;letter-spacing:.02em;}
+.ft-email{font-size:12px;letter-spacing:.06em;color:#000;text-decoration:none;border-bottom:1px solid #000;padding-bottom:2px;width:fit-content;transition:opacity .15s;}
+.ft-email:hover{opacity:.45;}
+.ft-right{display:flex;flex-direction:column;justify-content:space-between;gap:30px;}
+.ft-clock{font-family:'DotGothic16',sans-serif;font-size:38px;letter-spacing:.02em;opacity:.1;}
+.ft-links{display:flex;flex-direction:column;gap:0;}
+.ft-link{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#000;text-decoration:none;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #000;padding:12px 0;transition:opacity .15s;}
+.ft-link:hover{opacity:.45;}
+.ft-link span{opacity:.3;font-size:9px;}
+.ft-bottom{border-top:1px solid #000;padding:18px 40px;display:flex;align-items:center;justify-content:space-between;}
+.ft-copy{font-size:9px;letter-spacing:.14em;text-transform:uppercase;opacity:.3;}
+@media(max-width:680px){.ft-wrap{grid-template-columns:1fr;gap:40px;padding:40px 20px 60px;}.ft-title{font-size:36px;}.ft-clock{font-size:24px;}.ft-bottom{padding:16px 20px;flex-direction:column;gap:6px;align-items:flex-start;}.ft-email{font-size:10px;word-break:break-all;}.ft-eyebrow{font-size:8px;}}
+@media(max-width:400px){.ft-wrap{padding:32px 16px 48px;}.ft-title{font-size:28px;}.ft-bottom{padding:14px 16px;}}
+</style>
+</head>
+<body>
+
+<header class="h"><div class="wrap h-in">
+  <a class="brand" href="index.html"><img src="assets/proj/logo.png" alt="Vitto"><span>Vittoria Fornari</span></a>
+  <nav class="h-nav">
+    <a href="index.html">Home</a>
+    <a href="index.html">Works</a>
+    <a href="funprojects.html">Fun Projects</a>
+    <a href="aboutme.html" class="active">About</a>
+    <a href="https://www.instagram.com/vitto_gd" target="_blank">Instagram</a>
+    <a href="https://www.linkedin.com/in/vittoria-fornari-6405b0313" target="_blank">LinkedIn</a>
+    <a href="https://www.behance.net/vittoriafornari2" target="_blank">Behance</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+  <section class="about-hero">
+    <img src="assets/proj/logo.png" alt="Vittoria Fornari">
+    <h1>Hi, I'm Vittoria,<br>but you can call me <span class="script">Vitto!</span></h1>
+  </section>
+
+  <section class="about-body">
+    <div>
+      <p class="lead">I was born in a small town in the heart of Italy. Among my many random hobbies — fencing, needlework and reading — art has always stuck with me as my first love, in every shape and form.</p>
+
+      <p class="block-k">What I do</p>
+      <div class="skills">
+        <span>Editorial Design</span>
+        <span>UX / UI</span>
+        <span>Illustration</span>
+        <span>Motion Graphics</span>
+        <span>Art Direction</span>
+        <span>Advertising</span>
+      </div>
+    </div>
+
+    <div>
+      <p class="block-k">Lately loving</p>
+      <ul class="loving">
+        <li>mango</li>
+        <li>breakfast and TFT</li>
+        <li>cat sticking out tongue meme</li>
+        <li>Peach Riot figures</li>
+        <li>keychains</li>
+        <li>losing on valorant</li>
+        <li>Rosalía's LUX</li>
+      </ul>
+
+      <p class="block-k">Find me at</p>
+      <div class="find">
+        <a href="mailto:vittoriaafornari003@gmail.com">Email <span>↗</span></a>
+        <a href="https://www.instagram.com/vitto_gd" target="_blank">Instagram <span>↗</span></a>
+        <a href="https://www.linkedin.com/in/vittoria-fornari-6405b0313" target="_blank">LinkedIn <span>↗</span></a>
+        <a href="https://www.behance.net/vittoriafornari2" target="_blank">Behance <span>↗</span></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="ft-wrap">
+    <div class="ft-cta">
+      <span class="ft-eyebrow">Let's work together</span>
+      <div class="ft-title">LET'S<br>HAVE A<br>CHAT</div>
+      <a class="ft-email" href="mailto:vittoriaafornari003@gmail.com">vittoriaafornari003@gmail.com</a>
+    </div>
+    <div class="ft-right">
+      <div class="ft-clock" id="ft-clock">00:00:00</div>
+      <div class="ft-links">
+        <a class="ft-link" href="https://www.instagram.com/vitto_gd" target="_blank" rel="noreferrer">Instagram<span>↗</span></a>
+        <a class="ft-link" href="https://www.linkedin.com/in/vittoria-fornari-6405b0313" target="_blank" rel="noreferrer">LinkedIn<span>↗</span></a>
+        <a class="ft-link" href="https://www.behance.net/vittoriafornari2" target="_blank" rel="noreferrer">Behance<span>↗</span></a>
+        <a class="ft-link" href="https://x.com/jeonvittoo" target="_blank" rel="noreferrer">X<span>↗</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <span class="ft-copy">© 2025 Vittoria Fornari</span>
+    <span class="ft-copy">Visual Designer</span>
+  </div>
+</footer>
+<script>
+(function(){function tick(){var el=document.getElementById('ft-clock');if(!el)return;el.textContent=new Date().toLocaleTimeString('it-IT',{timeZone:'Europe/Rome',hour:'2-digit',minute:'2-digit',second:'2-digit'});}tick();setInterval(tick,1000);})();
+</script>
+</body>
+</html>
