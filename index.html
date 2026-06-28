@@ -242,7 +242,29 @@
 .vr-tl { font-family:'DotGothic16',sans-serif; font-size:9px; letter-spacing:.16em; text-transform:uppercase; color:#000; border-bottom:1px solid #000; padding-bottom:1px; }
 
 /* footer */
-.vr-ft-c { position:absolute; bottom:22px; left:50%; transform:translateX(-50%); font-family:'DotGothic16',sans-serif; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:rgba(0,0,0,.45); pointer-events:none; white-space:nowrap; opacity:0; animation:vrFadeIn 1s 2.8s forwards; }
+.vr-ft-c { position:absolute; bottom:56px; left:50%; transform:translateX(-50%); font-family:'DotGothic16',sans-serif; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:rgba(0,0,0,.45); pointer-events:none; white-space:nowrap; opacity:0; animation:vrFadeIn 1s 2.8s forwards; }
+
+/* ── VIEW TOGGLE ── */
+.vr-toggle { position:absolute; bottom:16px; left:50%; transform:translateX(-50%); z-index:60; display:flex; border:1px solid #000; background:#fff; }
+.vr-toggle button { font-family:'DotGothic16',sans-serif; font-size:10px; letter-spacing:.14em; text-transform:uppercase; padding:8px 18px; background:none; border:none; cursor:pointer; color:rgba(0,0,0,.45); transition:background .15s,color .15s; }
+.vr-toggle button + button { border-left:1px solid #000; }
+.vr-toggle button.active { background:#000; color:#fff; }
+.vr-toggle button:not(.active):hover { color:#000; }
+
+/* ── GALLERY VIEW ── */
+#vr-gallery { position:absolute; top:64px; left:0; right:0; bottom:0; z-index:5; overflow-y:auto; padding:44px 40px 96px; display:none; }
+#vr.gallery #vr-map { display:none; }
+#vr.gallery #vr-gallery { display:block; }
+#vr.gallery .vr-ft-c { display:none; }
+.vr-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:38px 28px; max-width:1240px; margin:0 auto; }
+.gcard { cursor:pointer; display:flex; flex-direction:column; gap:9px; }
+.gcard .gimg { position:relative; width:100%; aspect-ratio:1/1; border:1px solid #000; overflow:hidden; background:#e8e8e8; }
+.gcard .gimg img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .28s ease; }
+.gcard:hover .gimg img { transform:scale(1.05); }
+.gcard .gnum { position:absolute; top:7px; left:7px; width:20px; height:20px; background:#000; color:#fff; font-family:'DotGothic16',sans-serif; font-size:9px; display:flex; align-items:center; justify-content:center; }
+.gcard .gtitle { font-family:'CHAOS16',sans-serif; font-size:19px; line-height:1; }
+.gcard .gcat { font-family:'DotGothic16',sans-serif; font-size:9.5px; letter-spacing:.14em; text-transform:uppercase; color:rgba(0,0,0,.45); }
+@media(max-width:680px){ #vr-gallery{ padding:30px 18px 96px; } .vr-grid{ grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:26px 16px; } .gcard .gtitle{ font-size:16px; } }
 .vr-ft-r { position:absolute; bottom:22px; right:40px; font-family:'DotGothic16',sans-serif; font-size:11px; letter-spacing:.13em; color:rgba(0,0,0,.45); opacity:0; animation:vrFadeIn 1s 2.8s forwards; }
 .vr-ft-l { position:absolute; bottom:22px; left:40px;  font-family:'DotGothic16',sans-serif; font-size:11px; letter-spacing:.13em; color:rgba(0,0,0,.45); opacity:0; animation:vrFadeIn 1s 2.8s forwards; }
 @keyframes vrFadeIn { to { opacity:1; } }
@@ -302,6 +324,15 @@
       <div class="vr-tc" id="vr-tip-c"></div>
       <span class="vr-tl">Open project →</span>
     </div>
+  </div>
+
+  <!-- gallery view -->
+  <div id="vr-gallery"><div class="vr-grid" id="vr-grid"></div></div>
+
+  <!-- view toggle -->
+  <div class="vr-toggle">
+    <button type="button" data-view="map" class="active">Map</button>
+    <button type="button" data-view="gallery">Gallery</button>
   </div>
 
   <div class="vr-ft-c">Drag to explore · click to open</div>
@@ -495,8 +526,34 @@ drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
   drawer.classList.remove('open');
 }));
 
+// ---- gallery view + map/gallery toggle ----
+const GRID = document.getElementById('vr-grid');
+PROJECTS.forEach(p => {
+  const a = document.createElement('a');
+  a.className = 'gcard'; a.href = p.url;
+  a.innerHTML = `
+    <div class="gimg"><div class="gnum">${String(p.n).padStart(2,'0')}</div>
+      <img src="${p.img}" alt="${p.title}" loading="lazy" onerror="this.remove()"></div>
+    <div class="gtitle">${p.title}</div>
+    <div class="gcat">${p.cat}</div>`;
+  GRID.appendChild(a);
+});
+
+const togBtns = document.querySelectorAll('.vr-toggle button');
+function setView(v) {
+  ROOT.classList.toggle('gallery', v === 'gallery');
+  togBtns.forEach(b => b.classList.toggle('active', b.dataset.view === v));
+  try { localStorage.setItem('vf-view', v); } catch(e) {}
+  if (v === 'map') build();
+}
+togBtns.forEach(b => b.addEventListener('click', () => setView(b.dataset.view)));
+
+let saved = 'map';
+try { saved = localStorage.getItem('vf-view') || 'map'; } catch(e) {}
+
 build();
-window.addEventListener('resize', build);
+setView(saved);
+window.addEventListener('resize', () => { if (!ROOT.classList.contains('gallery')) build(); });
 })();
 </script>
 
