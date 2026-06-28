@@ -79,6 +79,25 @@ header.h{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px soli
 
 footer.f{border-top:1px solid rgba(0,0,0,.12);}
 .f-in{display:flex;justify-content:space-between;padding:22px 0;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(0,0,0,.45);}
+
+/* ── SITE FOOTER ── */
+.site-foot{width:100%;background:#fff;border-top:1px solid #000;font-family:'DotGothic16',sans-serif;color:#000;}
+.ft-wrap{display:grid;grid-template-columns:1fr 1fr;padding:60px 40px 80px;gap:60px;}
+.ft-cta{display:flex;flex-direction:column;gap:20px;}
+.ft-eyebrow{font-size:9px;letter-spacing:.18em;text-transform:uppercase;opacity:.38;}
+.ft-title{font-family:'DotGothic16',sans-serif;font-size:clamp(36px,6vw,72px);line-height:.95;letter-spacing:.02em;}
+.ft-email{font-size:12px;letter-spacing:.06em;color:#000;text-decoration:none;border-bottom:1px solid #000;padding-bottom:2px;width:fit-content;transition:opacity .15s;}
+.ft-email:hover{opacity:.45;}
+.ft-right{display:flex;flex-direction:column;justify-content:space-between;}
+.ft-clock{font-family:'DotGothic16',sans-serif;font-size:38px;letter-spacing:.02em;opacity:.1;}
+.ft-links{display:flex;flex-direction:column;gap:0;}
+.ft-link{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#000;text-decoration:none;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #000;padding:12px 0;transition:opacity .15s;}
+.ft-link:hover{opacity:.45;}
+.ft-link span{opacity:.3;font-size:9px;}
+.ft-bottom{border-top:1px solid #000;padding:18px 40px;display:flex;align-items:center;justify-content:space-between;}
+.ft-copy{font-size:9px;letter-spacing:.14em;text-transform:uppercase;opacity:.3;}
+@media(max-width:680px){.ft-wrap{grid-template-columns:1fr;gap:40px;padding:40px 20px 60px;}.ft-title{font-size:36px;}.ft-clock{font-size:24px;}.ft-bottom{padding:16px 20px;flex-direction:column;gap:6px;align-items:flex-start;}.ft-email{font-size:10px;word-break:break-all;}.ft-link{font-size:10px;padding:14px 0;}.ft-eyebrow{font-size:8px;}}
+@media(max-width:400px){.ft-wrap{padding:32px 16px 48px;}.ft-title{font-size:28px;}.ft-bottom{padding:14px 16px;}}
 </style>
 </head>
 <body>
@@ -128,17 +147,31 @@ footer.f{border-top:1px solid rgba(0,0,0,.12);}
   </nav>
 </main>
 
-<section class="chat wrap">
-  <h2>LET'S<br>HAVE A<br>CHAT</h2>
-  <a class="em" href="mailto:vittoriaafornari003@gmail.com">vittoriaafornari003@gmail.com</a>
-  <div class="soc">
-    <a href="https://www.instagram.com/vitto_gd" target="_blank">Instagram ↗</a>
-    <a href="https://www.linkedin.com/in/vittoria-fornari-6405b0313" target="_blank">LinkedIn ↗</a>
-    <a href="https://www.behance.net/vittoriafornari2" target="_blank">Behance ↗</a>
+<footer class="site-foot">
+  <div class="ft-wrap">
+    <div class="ft-cta">
+      <span class="ft-eyebrow">Let's work together</span>
+      <div class="ft-title">LET'S<br>HAVE A<br>CHAT</div>
+      <a class="ft-email" href="mailto:vittoriaafornari003@gmail.com">vittoriaafornari003@gmail.com</a>
+    </div>
+    <div class="ft-right">
+      <div class="ft-clock" id="ft-clock">00:00:00</div>
+      <div class="ft-links">
+        <a class="ft-link" href="https://www.instagram.com/vitto_gd" target="_blank" rel="noreferrer">Instagram<span>&#8599;</span></a>
+        <a class="ft-link" href="https://www.linkedin.com/in/vittoria-fornari-6405b0313" target="_blank" rel="noreferrer">LinkedIn<span>&#8599;</span></a>
+        <a class="ft-link" href="https://www.behance.net/vittoriafornari2" target="_blank" rel="noreferrer">Behance<span>&#8599;</span></a>
+        <a class="ft-link" href="https://x.com/jeonvittoo" target="_blank" rel="noreferrer">X<span>&#8599;</span></a>
+      </div>
+    </div>
   </div>
-</section>
-
-<footer class="f"><div class="wrap f-in"><span>© 2025 Vittoria Fornari</span><span>Visual Designer</span></div></footer>
+  <div class="ft-bottom">
+    <span class="ft-copy">&copy; 2025 Vittoria Fornari</span>
+    <span class="ft-copy">Visual Designer</span>
+  </div>
+</footer>
+<script>
+(function(){function tick(){var el=document.getElementById('ft-clock');if(!el)return;el.textContent=new Date().toLocaleTimeString('it-IT',{timeZone:'Europe/Rome',hour:'2-digit',minute:'2-digit',second:'2-digit'});}tick();setInterval(tick,1000);})();
+</script>
 
 </body>
 </html>
