@@ -257,15 +257,21 @@
 #vr.gallery #vr-map { display:none; }
 #vr.gallery #vr-gallery { display:block; }
 #vr.gallery .vr-ft-c { display:none; }
-.vr-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:38px 28px; max-width:1240px; margin:0 auto; }
-.gcard { cursor:pointer; display:flex; flex-direction:column; gap:9px; }
-.gcard .gimg { position:relative; width:100%; aspect-ratio:1/1; border:1px solid #000; overflow:hidden; background:#e8e8e8; }
-.gcard .gimg img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .28s ease; }
-.gcard:hover .gimg img { transform:scale(1.05); }
-.gcard .gnum { position:absolute; top:7px; left:7px; width:20px; height:20px; background:#000; color:#fff; font-family:'DotGothic16',sans-serif; font-size:9px; display:flex; align-items:center; justify-content:center; }
-.gcard .gtitle { font-family:'CHAOS16',sans-serif; font-size:19px; line-height:1; }
-.gcard .gcat { font-family:'DotGothic16',sans-serif; font-size:9.5px; letter-spacing:.14em; text-transform:uppercase; color:rgba(0,0,0,.45); }
-@media(max-width:680px){ #vr-gallery{ padding:30px 18px 96px; } .vr-grid{ grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:26px 16px; } .gcard .gtitle{ font-size:16px; } }
+.vr-grid { columns:2; column-gap:20px; max-width:1000px; margin:0 auto; }
+.wg-card { position:relative; overflow:hidden; border:1px solid #000; display:block; opacity:0; animation:wgUp .5s ease forwards; cursor:pointer; break-inside:avoid; margin-bottom:20px; }
+.wg-card:nth-child(1){animation-delay:.04s}.wg-card:nth-child(2){animation-delay:.09s}.wg-card:nth-child(3){animation-delay:.14s}.wg-card:nth-child(4){animation-delay:.19s}.wg-card:nth-child(5){animation-delay:.24s}.wg-card:nth-child(6){animation-delay:.29s}.wg-card:nth-child(7){animation-delay:.34s}.wg-card:nth-child(8){animation-delay:.39s}
+@keyframes wgUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+.wg-img { width:100%; display:block; object-fit:cover; transition:filter .25s, transform .28s; filter:grayscale(12%); }
+.wg-overlay { position:absolute; inset:0; z-index:2; background:rgba(255,255,255,.18); transition:background .25s; pointer-events:none; }
+.wg-num { position:absolute; top:10px; left:10px; z-index:3; width:22px; height:22px; background:#000; color:#fff; font-size:8px; display:flex; align-items:center; justify-content:center; font-family:'DotGothic16',sans-serif; }
+.wg-label { position:absolute; bottom:0; left:0; right:0; z-index:3; padding:12px 14px; background:rgba(255,255,255,.95); border-top:1px solid #000; display:flex; flex-direction:column; gap:4px; transform:translateY(100%); transition:transform .22s ease; }
+.wg-lname { font-family:'DotGothic16',sans-serif; font-size:14px; color:#000; line-height:1; }
+.wg-lcat { font-family:'DotGothic16',sans-serif; font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:rgba(0,0,0,.45); }
+.wg-larr { font-family:'DotGothic16',sans-serif; font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:#000; border-bottom:1px solid #000; width:fit-content; padding-bottom:1px; margin-top:4px; }
+.wg-card:hover .wg-img { filter:grayscale(0%); transform:scale(1.02); }
+.wg-card:hover .wg-overlay { background:rgba(255,255,255,0); }
+.wg-card:hover .wg-label { transform:translateY(0); }
+@media(max-width:680px){ #vr-gallery{ padding:30px 18px 96px; } .vr-grid{ columns:1; } }
 .vr-ft-r { position:absolute; bottom:22px; right:40px; font-family:'DotGothic16',sans-serif; font-size:11px; letter-spacing:.13em; color:rgba(0,0,0,.45); opacity:0; animation:vrFadeIn 1s 2.8s forwards; }
 .vr-ft-l { position:absolute; bottom:22px; left:40px;  font-family:'DotGothic16',sans-serif; font-size:11px; letter-spacing:.13em; color:rgba(0,0,0,.45); opacity:0; animation:vrFadeIn 1s 2.8s forwards; }
 @keyframes vrFadeIn { to { opacity:1; } }
@@ -529,14 +535,19 @@ drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
 
 // ---- gallery view + map/gallery toggle ----
 const GRID = document.getElementById('vr-grid');
+const AR = { maggo:'3/4', enifolia:'1/1', clash:'1/1', scomodo:'3/4', bozza:'1/1', infographics:'1/1', naturamatic:'3/4', guardians:'16/9' };
 PROJECTS.forEach(p => {
   const a = document.createElement('a');
-  a.className = 'gcard'; a.href = p.url;
+  a.className = 'wg-card'; a.href = p.url;
   a.innerHTML = `
-    <div class="gimg"><div class="gnum">${String(p.n).padStart(2,'0')}</div>
-      <img src="${p.img}" alt="${p.title}" loading="lazy" onerror="this.remove()"></div>
-    <div class="gtitle">${p.title}</div>
-    <div class="gcat">${p.cat}</div>`;
+    <div class="wg-overlay"></div>
+    <div class="wg-num">${String(p.n).padStart(2,'0')}</div>
+    <img class="wg-img" src="${p.img}" alt="${p.title}" loading="lazy" style="aspect-ratio:${AR[p.id]||'1/1'}" onerror="this.closest('.wg-card').remove()">
+    <div class="wg-label">
+      <span class="wg-lname">${p.title}</span>
+      <span class="wg-lcat">${p.cat}</span>
+      <span class="wg-larr">View project →</span>
+    </div>`;
   GRID.appendChild(a);
 });
 
